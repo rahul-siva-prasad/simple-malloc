@@ -118,5 +118,11 @@ int main(){
     char* ptr1 = mem_malloc(8);
     char* ptr2 = mem_malloc(7);
     char* ptr3 = mem_malloc(1);
+
+    mem_free(ptr0);
+    mem_free(ptr1);
+    mem_free(ptr2);
+    mem_free(ptr3);
+
     return 0;
 }
