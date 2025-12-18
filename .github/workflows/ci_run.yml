@@ -1,0 +1,27 @@
+name: building-ci-github-actions
+
+on: [push]
+jobs:
+    build-code:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v4
+            
+            - name: Install build tools
+              run: sudo apt-get update; sudo apt-get install -y build-essential
+
+            - name: Build simple_malloc
+              run: gcc -Wall -Werror simple_malloc.c -o simple_malloc
+              
+            - name: Verify artifacts
+              run: |
+                if [ -x "./simple_malloc" ]; then
+                    echo "Build succeeded: ./simple_malloc exists and is executable"
+                    ls -la ./simple_malloc
+                else
+                    echo "Build failed: binary not found" >&2
+                    ls -la
+                    exit 1
+                fi
+        
